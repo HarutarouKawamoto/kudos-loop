@@ -4,6 +4,7 @@ services:
     ports:
       - '3000:3000'  # Next.js用
       - "5555:5555"  # Prisma Studio用
+    command: npm run start:dev
     volumes:
       - ./backend:/app
       - /app/node_modules
