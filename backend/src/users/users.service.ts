@@ -7,11 +7,15 @@ import * as bcrypt from 'bcrypt';
 export class UsersService {
     constructor(private prisma: PrismaService) {}
     async createUser(data: SignupDto){
+
+        const hashedPassword = await bcrypt.hash(data.password, 10);
+        console.log('ハッシュ化済みパスワード:', hashedPassword);
         return this.prisma.user.create({
             data:{
                 email: data.email,
-                password: data.password,
                 name: data.name,
+                password: hashedPassword,
+
             }
         })
     }
