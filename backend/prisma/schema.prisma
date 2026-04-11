@@ -1,5 +1,6 @@
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
@@ -19,8 +20,8 @@ model User {
   email         String             @unique
   name          String
   password      String
-  teamId        Int
-  team          Team               @relation(fields: [teamId], references: [id])
+  teamId        Int?
+  team          Team?               @relation(fields: [teamId], references: [id])
   sentKudos     KudosTransaction[] @relation("Sender")
   receivedKudos KudosTransaction[] @relation("Receiver")
 }
