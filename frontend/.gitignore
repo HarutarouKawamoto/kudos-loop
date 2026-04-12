@@ -1,0 +1,16 @@
+# frontend/.gitignore
+
+# 依存関係（巨大なので絶対コミットしない）
+node_modules/
+
+# Next.js のビルド成果物とキャッシュ
+.next/
+out/
+build/
+
+# 環境変数（秘密情報なので絶対ダメ！）
+.env*.local
+
+# OSのゴミファイル
+.DS_Store
+Thumbs.db
