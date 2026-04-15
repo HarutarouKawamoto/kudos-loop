@@ -11,6 +11,17 @@ async function bootstrap() {
     forbidNonWhitelisted:true,
     transform: true,
   }));
-  await app.listen(process.env.PORT ?? 3000);
+
+  //CORSの設定有効化（3000番からのアクセスを許可）
+  app.enableCors({
+    origin: "http://localhost:3000",
+    methods: "GET,HEAD,PUT,PATH,POST,DELETE",
+    credentials:true,
+  });
+    // 3001番ポートで待ち受け開始
+    await app.listen(3000);
+    console.log(`アプリケーションは http://localhost:3001 で実行されています。`);
+  
+
 }
 bootstrap();
