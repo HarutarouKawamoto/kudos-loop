@@ -13,6 +13,9 @@ model Team {
   id    Int    @id @default(autoincrement())
   name  String
   users User[]
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("teams")
 }
 
 model User {
@@ -24,6 +27,9 @@ model User {
   team          Team?               @relation(fields: [teamId], references: [id])
   sentKudos     KudosTransaction[] @relation("Sender")
   receivedKudos KudosTransaction[] @relation("Receiver")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  @@map("users")
 }
 
 model Badge {
@@ -32,6 +38,8 @@ model Badge {
   description String
   iconUrl     String
   kudos       KudosTransaction[]
+
+  @@map("badges")
 }
 
 model KudosTransaction {
@@ -45,4 +53,6 @@ model KudosTransaction {
   sender   User  @relation("Sender", fields: [senderId], references: [id])
   receiver User  @relation("Receiver", fields: [receiverId], references: [id])
   badge    Badge @relation(fields: [badgeId], references: [id])
+
+  @@map("kudos_transactions")
 }
