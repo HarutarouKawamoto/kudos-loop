@@ -2,7 +2,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Lock, Mail, User, UserPlus } from "lucide-react";
+import { Lock, Mail, UserPlus } from "lucide-react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
