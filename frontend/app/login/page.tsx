@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Lock, Mail } from "lucide-react";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 
 
@@ -17,6 +18,7 @@ const loginSchema = z.object({
 type LoginFormValues = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
+  const router = useRouter();
   // react-hook-formの初期化
   const {
     register,
@@ -37,11 +39,15 @@ export default function LoginPage() {
       });
 
       // 成功した場合：トークンを取得して保存
-      const { access_token } = response.data;
+      const { access_token, user } = response.data;
       console.log("ログイン成功。トークン:", access_token);
       localStorage.setItem("token", access_token);
 
-      alert("ログインに成功しました！");
+      if (user&&user.teamId) {
+        router.push("/dashboard");
+      }else{
+        router.push("/onboarding");
+      }
       // TODO: router.push("/dashboard") などで画面遷移させる
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
