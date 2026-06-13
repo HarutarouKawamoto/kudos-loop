@@ -11,4 +11,10 @@ export class TeamsController {
         return this.teamService.createTeam(createTeamDto.name,req.user.userId);
 
     } 
+
+    @Post('join')
+    @UseGuards(AuthGuard('jwt'))
+    async join(@Body() joinTeamDto: { inviteCode: string },@Request() req){
+        return this.teamService.joinTeam(joinTeamDto.inviteCode,req.user.userId);
+    }
 }
